@@ -33,11 +33,22 @@ app.get('/api/time/:timeString', (req, res) => {
 });
 
 app.get('/api/whoami', (req, res) => {
-  const userIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const ipaddress = req.header('x-forwarded-for') ||
+    req.connection.remoteAddress;
+  let software = req.headers['user-agent'].match(/\(([^)]+)\)/);
+  let language = req.headers['accept-language'].match(/^([^,]*)/);
 
-  console.log(req.ip);
+  // Checks just in case regex fails and returns null
+  software = software ? software[1] : 'Not available';
+  language = language ? language[1] : 'Not available';
 
-  res.sendStatus(200);
+  const payload = {
+    ipaddress,
+    language,
+    software
+  };
+
+  res.status(200).send(payload);
 });
 
 app.listen(PORT, () => console.log('connected'));
