@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "API Projects for FreeCodeCamp Back End Development Cert",
   "main": "server.js",
+  "repository": "https://github.com/jonabantao/fcc-api-services.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",

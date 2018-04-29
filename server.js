@@ -1,6 +1,7 @@
 const express = require('express');
 const moment = require('moment');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.get('/api/time/:timeString', (req, res) => {
   const timeString = req.params.timeString;
@@ -31,4 +32,12 @@ app.get('/api/time/:timeString', (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('connected'));
+app.get('/api/whoami', (req, res) => {
+  const userIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+  console.log(req.ip);
+
+  res.sendStatus(200);
+});
+
+app.listen(PORT, () => console.log('connected'));
