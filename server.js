@@ -48,7 +48,11 @@ app.get('/api/whoami', (req, res) => {
     software
   };
 
-  res.status(200).send(payload);
+  res.status(200).json(payload);
+});
+
+app.get('*', (req, res) => {
+  res.status(404).json({ message: 'Not a valid API endpoint'});
 });
 
 app.listen(PORT, () => console.log('connected'));
