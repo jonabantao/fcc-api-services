@@ -3,20 +3,18 @@ const moment = require('moment');
 
 const router = express.Router();
 
+function isNumeric(timeStr) {
+  return Number.isNaN(Number(timeStr));
+}
+
 router.get('/:timeString', (req, res) => {
   const { timeString } = req.params;
   let time;
-  let unix;
-  let natural;
 
-  if (Number.isNaN(Number(timeString))) {
+  if (isNumeric(timeString)) {
     time = moment(timeString, 'MMMM Do YYYY');
-    unix = time.unix();
-    natural = time.format('MMMM Do YYYY');
   } else {
     time = moment.unix(timeString);
-    unix = time.unix();
-    natural = time.format('MMMM Do YYYY');
   }
 
   if (!time.isValid()) {
@@ -25,6 +23,9 @@ router.get('/:timeString', (req, res) => {
       natural: null,
     });
   }
+
+  const unix = time.unix();
+  const natural = time.format('MMMM Do YYYY');
 
   return res.status(200).json({
     unix,
