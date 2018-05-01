@@ -15,7 +15,7 @@ router.get('/:timeString', (req, res) => {
     natural = time.format('MMMM Do YYYY');
   } else {
     time = moment.unix(timeString);
-    unix = time;
+    unix = time.unix();
     natural = time.format('MMMM Do YYYY');
   }
 
