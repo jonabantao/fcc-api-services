@@ -17,13 +17,18 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
-    "moment": "^2.22.1"
+    "moment": "^2.22.1",
+    "mongoose": "^5.0.17",
+    "valid-url": "^1.0.9"
   },
   "engines": {
     "node": "8.11.1",
     "npm": "6.0.0"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
     "nodemon": "^1.17.3"
   }
 }

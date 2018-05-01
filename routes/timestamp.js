@@ -1,9 +1,10 @@
 const express = require('express');
 const moment = require('moment');
+
 const router = express.Router();
 
 router.get('/:timeString', (req, res) => {
-  const timeString = req.params.timeString;
+  const { timeString } = req.params;
   let time;
   let unix;
   let natural;
@@ -25,7 +26,7 @@ router.get('/:timeString', (req, res) => {
     });
   }
 
-  res.status(200).json({
+  return res.status(200).json({
     unix,
     natural,
   });
