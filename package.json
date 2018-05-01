@@ -5,7 +5,7 @@
   "main": "server.js",
   "repository": "https://github.com/jonabantao/fcc-api-services.git",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js",
     "nodemon": "nodemon server.js"
   },
@@ -29,6 +29,9 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "nodemon": "^1.17.3"
+    "eslint-plugin-jest": "^21.15.1",
+    "jest": "^22.4.3",
+    "nodemon": "^1.17.3",
+    "supertest": "^3.0.0"
   }
 }
