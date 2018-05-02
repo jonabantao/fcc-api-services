@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../../config/app');
 
-describe('timestamp API', () => {
+describe('GET /api/time/:timeString', () => {
   test('should correctly return unix time and natural time for natural date', () => {
     const route = 'Jan%20%2018';
     const expectedBody = {
