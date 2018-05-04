@@ -1,26 +1,33 @@
 const request = require('supertest');
 const app = require('../../config/app');
 
-describe('GET /api/url/new', () => {
+describe('POST /api/url/new/', () => {
   test('should return error message for incorrect URL format', () => {
     const errorMsg = { message: 'Incorrect format. Please use a valid protocol and website.' };
+    const postData = { originalUrl: 'whatisthis' };
 
-    return request(app).get('/api/url/new/whatisthis').then((res) => {
-      expect(res.statusCode).toBe(422);
-      expect(res.body).toMatchObject(errorMsg);
-    });
+    return request(app).post('/api/url/new/')
+      .send(postData)
+      .then((res) => {
+        expect(res.statusCode).toBe(422);
+        expect(res.body).toMatchObject(errorMsg);
+      });
   });
 
   test('should return the long and short url for valid URLs', () => {
-    const URL = 'https://www.google.com/';
+    const originalUrl = 'https://www.google.com/';
+    const postData = { originalUrl };
     const validRes = {
-      original_url: URL,
-      short_url: expect.any(String),
+      originalUrl,
+      shortUrl: expect.any(String),
     };
 
-    return request(app).get(`/api/url/new/${URL}`).then((res) => {
-      expect(res.statusCode).toBe(200);
-      expect(res.body).toBe(validRes);
-    });
+    return request(app).post('/api/url/new/')
+      .send(postData)
+      .then((res) => {
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toMatchObject(validRes);
+        expect(res.body.shortUrl).toHaveLength(7);
+      });
   });
 });
