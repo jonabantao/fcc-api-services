@@ -3,6 +3,8 @@ const validUrl = require('valid-url');
 const crypto = require('crypto');
 
 const router = express.Router();
+const Url = require('../models/url');
+
 
 function createShortUrl(url) {
   return crypto.createHash('md5')
@@ -26,6 +28,14 @@ router.post('/new/', (req, res) => {
     originalUrl,
     shortUrl,
   });
+});
+
+router.get('/:shortUrl', (req, res) => {
+  const { shortUrl } = req.params;
+
+  Url.findById(shortUrl)
+    .then(() => console.log('stuff'))
+    .catch(() => res.status(404).json({ message: 'URL not found' }));
 });
 
 module.exports = router;

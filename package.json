@@ -5,7 +5,7 @@
   "main": "server.js",
   "repository": "https://github.com/jonabantao/fcc-api-services.git",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "start": "node server.js",
     "nodemon": "nodemon server.js"
   },

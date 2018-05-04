@@ -31,3 +31,14 @@ describe('POST /api/url/new/', () => {
       });
   });
 });
+
+describe('GET /api/url/:shortUrl', () => {
+  test('should return error for non existant urls', () => {
+    const errorMsg = { message: 'URL not found' };
+
+    return request(app).get('/api/url/notarealshorturl').then((res) => {
+      expect(res.statusCode).toBe(404);
+      expect(res.body).toMatchObject(errorMsg);
+    });
+  });
+});
