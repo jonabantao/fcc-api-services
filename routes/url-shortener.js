@@ -23,19 +23,28 @@ router.post('/new/', (req, res) => {
   }
 
   const shortUrl = createShortUrl(originalUrl);
+  const _id = shortUrl; // eslint-disable-line
 
-  return res.status(200).json({
-    originalUrl,
-    shortUrl,
-  });
+  return Url.findById(shortUrl)
+    .then(() => res.status(200).json({ originalUrl, shortUrl }))
+    .catch(() => {
+      Url.create({ _id, originalUrl, shortUrl })
+        .then(() => res.status(200).json({ originalUrl, shortUrl }));
+    });
 });
 
 router.get('/:shortUrl', (req, res) => {
   const { shortUrl } = req.params;
 
   Url.findById(shortUrl)
-    .then(() => console.log('stuff'))
-    .catch(() => res.status(404).json({ message: 'URL not found' }));
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({ message: 'URL not found' });
+      }
+
+      return res.status(200).json(result);
+    })
+    .catch(() => res.status(500).json({ message: 'Server error' }));
 });
 
 module.exports = router;

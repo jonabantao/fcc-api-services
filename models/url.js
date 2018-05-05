@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const UrlSchema = new Schema({
+  _id: {
+    type: String,
+    required: true,
+  },
   originalUrl: {
     type: String,
     required: true,
