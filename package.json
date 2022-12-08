@@ -16,7 +16,7 @@
   "author": "Jonathan Abantao",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "moment": "^2.22.1",
     "mongoose": "^5.0.17",
     "valid-url": "^1.0.9"
